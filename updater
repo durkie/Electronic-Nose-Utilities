@@ -1,0 +1,10 @@
+#!/bin/sh
+cd /home/pi/nose;
+cp screenlog.0 array-0;
+/home/pi/nose/csver array-0;
+tail -100 array-0.csv > array-0-small-3.csv
+RUNNING=`ps aux | grep "[p]lot" | wc -l`
+if [ "$RUNNING" -eq 0 ]; then
+  DISPLAY=:0.0 /home/pi/nose/plot;
+fi
+

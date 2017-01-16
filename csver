@@ -1,0 +1,13 @@
+#!/bin/sh
+# This converts data from the form:
+# 20:21:36 9 8 2016: A0: 488, A1: 544, A2: 481, A3: 348, A4: 342, A5: 346, A6: 357, A7: 349
+# to:
+# 20:30:16 9 8 2016,363,475,66,402,285,349,377,452
+
+echo "time,a0,a1,a2,a3,a4,a5,a6,a7,temp,ds18b20temp" > $1.csv
+#split -l 35814 $1 part
+#split -l 103383 $1 part
+#split -l 103376 $1 part
+cat $1 | perl -pe 's/2017: /2017,/; s/A0: //; s/ A1: //; s/ A2: //; s/ A3: //; s/ A4: //; s/ A5: //; s/ A6: //; s/ A7: //; s/ Temp: //; s/ DBTemp: //;' >> $1.csv
+#tail -n +103383 $1 | perl -pe 's/2016: /2016,/; s/A0: //; s/ A1: //; s/ A2: //; s/ A3: //; s/ A4: //; s/ A5: //; s/ A6: //; s/ A7: //; s/ Temp: //; s/ DBTemp: //;' >> $1-good.csv
+#tail -n +123126 $1 | perl -pe 's/2016: /2016,/; s/A0: //; s/ A1: //; s/ A2: //; s/ A3: //; s/ A4: //; s/ A5: //; s/ A6: //; s/ A7: //; s/ Temp: //; s/ DBTemp: //;' >> $1-good.csv
